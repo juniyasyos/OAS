@@ -14,15 +14,23 @@ use App\Filament\Exports\UserExporter;
 use App\Filament\Imports\UserImporter;
 use Filament\Forms\Components\Section;
 use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\BaseResource;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ExportBulkAction;
 use App\Filament\Resources\UserResource\Pages;
-use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 use Filament\Infolists\Components\Section as InfolistSection;
 
 class UserResource extends BaseResource
@@ -58,23 +66,23 @@ class UserResource extends BaseResource
     {
         return $table
             ->columns([
-                Tables\Columns\Layout\Split::make([
-                    Tables\Columns\ImageColumn::make('avatar_url')
+                Split::make([
+                    ImageColumn::make('avatar_url')
                         ->searchable()
                         ->circular()
                         ->grow(false)
                         ->getStateUsing(fn($record) => $record->avatar_url
                             ? $record->avatar_url
                             : "https://ui-avatars.com/api/?name=" . urlencode($record->name)),
-                    Tables\Columns\TextColumn::make('name')
+                    TextColumn::make('name')
                         ->searchable()
                         ->weight(FontWeight::Bold),
-                    Tables\Columns\Layout\Stack::make([
-                        Tables\Columns\TextColumn::make('roles.name')
+                    Stack::make([
+                        TextColumn::make('roles.name')
                             ->searchable()
                             ->icon('heroicon-o-shield-check')
                             ->grow(false),
-                        Tables\Columns\TextColumn::make('email')
+                        TextColumn::make('email')
                             ->icon('heroicon-m-envelope')
                             ->searchable()
                             ->grow(false),
@@ -89,8 +97,8 @@ class UserResource extends BaseResource
                     ->preload(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                ViewAction::make(),
+                EditAction::make(),
                 Action::make('Set Role')
                     ->icon('heroicon-m-adjustments-vertical')
                     ->form([
@@ -100,7 +108,7 @@ class UserResource extends BaseResource
                             ->required(),
                     ]),
                 // Impersonate::make(),
-                Tables\Actions\DeleteAction::make(),
+                DeleteAction::make(),
             ])
             ->headerActions([
                 ExportAction::make()
@@ -109,8 +117,8 @@ class UserResource extends BaseResource
                     ->importer(UserImporter::class)
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
                 ExportBulkAction::make()
                     ->exporter(UserExporter::class)
@@ -143,4 +151,15 @@ class UserResource extends BaseResource
                 ]),
             ]);
     }
+
+    public static function getModelLable(): string
+    {
+        return __('User');
+    }
+
+    public static function getPluralModelLabl(): string
+    {
+        return __('Users');
+    }
+
 }

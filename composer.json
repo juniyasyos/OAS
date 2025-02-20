@@ -19,12 +19,16 @@
         "filament/filament": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "filament/spatie-laravel-settings-plugin": "^3.2",
+        "filament/spatie-laravel-translatable-plugin": "^3.2",
         "hasnayeen/themes": "*",
         "jeffgreco13/filament-breezy": "^2.4",
+        "kenepa/translation-manager": "^4.0",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "leandrocfe/filament-apex-charts": "^3.1",
         "owenvoke/blade-fontawesome": "^2.8",
+        "njxqlus/filament-progressbar": "^1.0",
         "pxlrbt/filament-excel": "^2.3",
         "resend/resend-laravel": "^0.15.0",
         "rupadana/filament-api-service": "^3.3",
@@ -41,7 +45,8 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
         "pestphp/pest": "^3.6",
-        "pestphp/pest-plugin-laravel": "^3.0"
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "pestphp/pest-plugin-stressless": "^3.1"
     },
     "autoload": {
         "psr-4": {
@@ -59,7 +64,6 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php artisan storage:link",
             "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
@@ -77,6 +81,7 @@
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
         ],
         "setup": [
+            "@php artisan storage:link",
             "@php artisan migrate:fresh --seed",
             "@php artisan shield:generate --all",
             "@php artisan shield:super-admin"

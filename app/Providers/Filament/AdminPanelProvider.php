@@ -2,35 +2,36 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Login;
-use App\Settings\KaidoSetting;
-use Filament\Http\Middleware\Authenticate;
-use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
-use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
-use DutchCodingCompany\FilamentSocialite\Provider;
-use Filament\Forms\Components\FileUpload;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
-use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\Widgets;
-use Hasnayeen\Themes\Http\Middleware\SetTheme;
+use Filament\PanelProvider;
+use App\Filament\Pages\Login;
+use App\Settings\KaidoSetting;
+use Filament\Support\Colors\Color;
 use Hasnayeen\Themes\ThemesPlugin;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Support\Facades\Schema;
+use Filament\Forms\Components\FileUpload;
+use Rupadana\ApiService\ApiServicePlugin;
+use Filament\Http\Middleware\Authenticate;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Hasnayeen\Themes\Http\Middleware\SetTheme;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use DutchCodingCompany\FilamentSocialite\Provider;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Jeffgreco13\FilamentBreezy\BreezyCore;
-use Rupadana\ApiService\ApiServicePlugin;
+use Kenepa\TranslationManager\TranslationManagerPlugin;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
 
-use Laravel\Socialite\Contracts\User as SocialiteUserContract;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+// use Laravel\Socialite\Contracts\User as SocialiteUserContract;
+use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -42,6 +43,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->when($this->settings->login_enabled ?? true, fn($panel) => $panel->login(Login::class))
             ->when($this->settings->registration_enabled ?? true, fn($panel) => $panel->registration())
             ->when($this->settings->password_reset_enabled ?? true, fn($panel) => $panel->passwordReset())
@@ -86,6 +88,7 @@ class AdminPanelProvider extends PanelProvider
     private function getPlugins(): array
     {
         $plugins = [
+            TranslationManagerPlugin::make(),
             ThemesPlugin::make(),
             FilamentShieldPlugin::make(),
             ApiServicePlugin::make(),
@@ -101,7 +104,7 @@ class AdminPanelProvider extends PanelProvider
                 ->avatarUploadComponent(
                     fn() => FileUpload::make('avatar_url')
                         ->image()
-                        ->disk('public')
+                        ->disk('public/user-profile/')
                 )
                 ->enableTwoFactorAuthentication(),
         ];
@@ -109,14 +112,14 @@ class AdminPanelProvider extends PanelProvider
         if ($this->settings->sso_enabled ?? true) {
             $plugins[] =
                 FilamentSocialitePlugin::make()
-                ->providers([
-                    Provider::make('google')
-                        ->label('Google')
-                        ->icon('fab-google')
-                        ->color(Color::hex('#2f2a6b'))
-                        ->outlined(true)
-                        ->stateless(false)
-                ])->registration(true);
+                    ->providers([
+                        Provider::make('google')
+                            ->label('Google')
+                            ->icon('fab-google')
+                            ->color(Color::hex('#2f2a6b'))
+                            ->outlined(true)
+                            ->stateless(false)
+                    ])->registration(true);
         }
         return $plugins;
     }
