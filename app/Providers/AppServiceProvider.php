@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -26,16 +24,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-
         // Gate::policy()
         Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
             $event->extendSocialite('discord', \SocialiteProviders\Google\Provider::class);
         });
 
-        // Ngrok For Development
-        if (config('app.env') === 'local') {
-            URL::forceScheme('Https');
-        }
+        // // Ngrok For Development
+        // if (config('app.env') === 'local') {
+        //     URL::forceScheme('Https');
+        // }
     }
 }

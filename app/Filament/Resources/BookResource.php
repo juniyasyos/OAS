@@ -2,24 +2,27 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Exports\BookExporter;
-use App\Filament\Imports\BookImporter;
-use App\Filament\Resources\BookResource\Pages;
-use App\Models\Book;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
+use App\Models\Book;
+use Filament\Tables;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Tables\Table;
+use App\Traits\HasActiveIcon;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use App\Filament\Exports\BookExporter;
+use App\Filament\Imports\BookImporter;
+use App\Filament\Resources\BaseResource;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
-use Filament\Tables\Table;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use App\Filament\Resources\BookResource\Pages;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class BookResource extends Resource implements HasShieldPermissions
+class BookResource extends BaseResource implements HasShieldPermissions
 {
+    //
     protected static ?string $model = Book::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';

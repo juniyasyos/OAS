@@ -35,19 +35,6 @@ use Illuminate\Support\Facades\Schema;
 class AdminPanelProvider extends PanelProvider
 {
     private ?KaidoSetting $settings = null;
-    //constructor
-    public function __construct()
-    {
-        //this is feels bad but this is the solution that i can think for now :D
-        // Check if settings table exists first
-        try {
-            if (\Illuminate\Support\Facades\Schema::hasTable('settings')) {
-                $this->settings = app(KaidoSetting::class);
-            }
-        } catch (\Exception $e) {
-            $this->settings = null;
-        }
-    }
 
     public function panel(Panel $panel): Panel
     {
@@ -111,7 +98,6 @@ class AdminPanelProvider extends PanelProvider
                     slug: 'my-profile'
                 )
                 ->avatarUploadComponent(fn($fileUpload) => $fileUpload->disableLabel())
-                // OR, replace with your own component
                 ->avatarUploadComponent(
                     fn() => FileUpload::make('avatar_url')
                         ->image()
