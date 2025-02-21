@@ -122,7 +122,18 @@ class AdminPanelProvider extends PanelProvider
                             ->color(Color::hex('#2f2a6b'))
                             ->outlined(true)
                             ->stateless(false)
-                    ])->registration(true);
+                    ])->registration(true)
+                    ->createUserUsing(function (string $provider, SocialiteUserContract $oauthUser, FilamentSocialitePlugin $plugin) {
+                        $user = User::firstOrNew([
+                            'email' => $oauthUser->getEmail(),
+                        ]);
+                        $user->name = $oauthUser->getName();
+                        $user->email = $oauthUser->getEmail();
+                        $user->email_verified_at = now();
+                        $user->save();
+
+                        return $user;
+                    });
         }
         return $plugins;
     }

@@ -2,6 +2,14 @@
 
 **OAS** is a robust and scalable **FilamentPHP** starter kit designed to streamline the development of **admin panels**. This project is a **fork of [Kaido Kit](https://github.com/siubie/kaido-kit)**, incorporating additional optimizations, custom configurations, and enhanced features tailored for a **seamless developer experience**.
 
+![GitHub stars](https://img.shields.io/github/stars/juniyasyos/oas?style=flat-square)
+![GitHub forks](https://img.shields.io/github/forks/juniyasyos/oas?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/juniyasyos/oas?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+![PHP Version](https://img.shields.io/badge/PHP-8.2-blue?style=flat-square&logo=php)
+![Laravel Version](https://img.shields.io/badge/Laravel-11.0-red?style=flat-square&logo=laravel)
+![Filament Version](https://img.shields.io/badge/Filament-3.2-purple?style=flat-square)
+
 ## 🎯 Purpose  
 
 OAS aims to provide a **powerful, pre-configured foundation** for developers building administrative dashboards, management systems, and enterprise applications. It focuses on:  
