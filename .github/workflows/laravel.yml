@@ -45,7 +45,7 @@ jobs:
     - name: Setup database
       run: |
         php artisan migrate:fresh --seed --no-interaction
-        php artisan shield:generate --all --no-interaction
+        # php artisan shield:generate --all --no-interaction
 
     - name: Set Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
