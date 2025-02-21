@@ -15,6 +15,7 @@ use Filament\Forms\Components\FileUpload;
 use Rupadana\ApiService\ApiServicePlugin;
 use Filament\Http\Middleware\Authenticate;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Rmsramos\Activitylog\ActivitylogPlugin;
 use Hasnayeen\Themes\Http\Middleware\SetTheme;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Session\Middleware\StartSession;
@@ -28,8 +29,8 @@ use Kenepa\TranslationManager\TranslationManagerPlugin;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 // use Laravel\Socialite\Contracts\User as SocialiteUserContract;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -88,6 +89,10 @@ class AdminPanelProvider extends PanelProvider
     {
         $plugins = [
             ThemesPlugin::make(),
+            ActivitylogPlugin::make()
+                ->label('Log')
+                ->navigationItem()
+                ->navigationGroup('Activity Log'),
             FilamentShieldPlugin::make(),
             // ApiServicePlugin::make(),
             BreezyCore::make()

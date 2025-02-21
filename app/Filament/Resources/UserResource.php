@@ -19,6 +19,7 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\BaseResource;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ExportAction;
@@ -32,6 +33,8 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ExportBulkAction;
 use App\Filament\Resources\UserResource\Pages;
 use Filament\Infolists\Components\Section as InfolistSection;
+use Rmsramos\Activitylog\Actions\ActivityLogTimelineTableAction;
+use Rmsramos\Activitylog\RelationManagers\ActivitylogRelationManager;
 
 class UserResource extends BaseResource
 {
@@ -97,8 +100,7 @@ class UserResource extends BaseResource
                     ->preload(),
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
+                ActivityLogTimelineTableAction::make('Activities'),
                 Action::make('Set Role')
                     ->icon('heroicon-m-adjustments-vertical')
                     ->form([
@@ -107,8 +109,12 @@ class UserResource extends BaseResource
                             ->multiple()
                             ->required(),
                     ]),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ])->button()->label('Actions'),
                 // Impersonate::make(),
-                DeleteAction::make(),
             ])
             ->headerActions([
                 ExportAction::make()
@@ -128,7 +134,7 @@ class UserResource extends BaseResource
     public static function getRelations(): array
     {
         return [
-            //
+            ActivitylogRelationManager::class,
         ];
     }
 
