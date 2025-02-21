@@ -30,6 +30,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerif
         'name',
         'email',
         'password',
+        'phone_number',
         'avatar_url',
     ];
 

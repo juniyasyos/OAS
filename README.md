@@ -1,185 +1,144 @@
-# 🚀 Kaido Kit FilamentPhp Starter Code
+# 🌟 OAS - Organizational Administration System  
 
-A powerful and opinionated FilamentPHP starter kit designed to accelerate your admin panel development. Kaido Kit provides a robust foundation with pre-configured plugins, configuration and best practices for building feature-rich admin interfaces.
+**OAS** is a robust and scalable **FilamentPHP** starter kit designed to streamline the development of **admin panels**. This project is a **fork of [Kaido Kit](https://github.com/siubie/kaido-kit)**, incorporating additional optimizations, custom configurations, and enhanced features tailored for a **seamless developer experience**.
 
-![GitHub stars](https://img.shields.io/github/stars/siubie/kaido-kit?style=flat-square)
-![GitHub forks](https://img.shields.io/github/forks/siubie/kaido-kit?style=flat-square)
-![GitHub issues](https://img.shields.io/github/issues/siubie/kaido-kit?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
-![PHP Version](https://img.shields.io/badge/PHP-8.2-blue?style=flat-square&logo=php)
-![Laravel Version](https://img.shields.io/badge/Laravel-11.0-red?style=flat-square&logo=laravel)
-![Filament Version](https://img.shields.io/badge/Filament-3.2-purple?style=flat-square)
-## ✨ Features
+## 🎯 Purpose  
 
-### 🛠️ Developer Experience
+OAS aims to provide a **powerful, pre-configured foundation** for developers building administrative dashboards, management systems, and enterprise applications. It focuses on:  
 
-- ⚡ Quick CRUD generation with customized [FilamentPHP](https://filamentphp.com/) stubs
-    - Optimized UX out of the box
-    - No need to modify generated resources
-- 🔄 Auto reload on save for rapid development
-- 📚 Easy API documentation using [Scramble](https://scramble.dedoc.co/)
-- 📤 Built-in Export and Import examples in Filament resources
+✅ **Accelerated Development** – Prebuilt **FilamentPHP** components for rapid CRUD generation.  
+✅ **Authentication & Authorization** – Role-Based Access Control (RBAC), **Google login**, **2FA**, and user impersonation.  
+✅ **API-Ready** – Seamless **Filament API Service** integration for building scalable applications.  
+✅ **Content & Media Management** – Integrated **Spatie Media Library** for handling images and files.  
+✅ **Performance & Customization** – Optimized structure with flexible configuration options.  
 
-### 🔐 Authentication & Authorization
+---
 
-- 🛡️ Role-Based Access Control (RBAC) using [Filament Shield](https://filamentphp.com/plugins/bezhansalleh-shield)
-- 🔑 Enhanced login page with custom design
-- 🌐 Social login with Google via [Filament Socialite](https://filamentphp.com/plugins/dododedodonl-socialite)
-- 👤 User profile management with [Filament Breezy](https://filamentphp.com/plugins/jeffgreco-breezy)
-- 🔒 Instant 2-Factor Authentication capabilities
-- 👥 Simple user-to-role assignment
-- 🎭 User impersonation via [Filament Impersonate](https://filamentphp.com/plugins/joseph-szobody-impersonate)
+## 🚀 Quick Start  
 
-### 📡 API & Integration
+To set up OAS, follow the steps below:  
 
-- 🚀 Full API support with [Filament API Service](https://filamentphp.com/plugins/rupadana-api-service)
-    - Seamlessly integrated with Shield
-    - Ready-to-use API endpoints
-- 📨 Email integration using [Resend](https://resend.com/)
-- 📝 Auto-generated API documentation
+### 1️⃣ Clone the Repository  
+```sh
+git clone https://github.com/juniyasyos/OAS.git
+cd OAS
+```
 
-### 📁 Media & Content Management
+### 2️⃣ Install Dependencies  
+```sh
+composer install && npm install
+composer run post-update-cmd
+```
 
-- 🖼️ Integrated [Filament Media Library](https://filamentphp.com/plugins/filament-spatie-media-library)
-    - Easy media handling process
-    - [Spatie Media Library](https://spatie.be/docs/laravel-medialibrary) support
+### 3️⃣ Environment Setup  
+```sh
+composer run post-root-package-install
+composer run post-create-project-cmd
+```
+Modify the `.env` file to configure your **database** and **third-party integrations**.  
 
-### ⚙️ Configuration & Settings
+### 4️⃣ Migrate Database  
+```sh
+composer run setup
+```
 
-- 🎛️ Dynamic plugin management via [Filament Settings](https://filamentphp.com/plugins/filament-spatie-settings)
-    - Enable/disable features on the fly
-    - [Spatie Laravel Settings](https://github.com/spatie/laravel-settings) integration
+### 5️⃣ Serve the Application  
+```sh
+composer run dev
+```
 
-## 🚀 Quick Start
+---
 
-1. Clone the repositories
-    
-    ```php
-    git@github.com:siubie/kaido-kit.git
-    ```
-    
-2. Composer install
-    
-    ```php
-    composer install
-    ```
-    
-3. Npm Install
-    
-    ```php
-    npm install
-    ```
-    
-4. Copy .env
-    
-    ```php
-    cp .env.example .env
-    ```
-    
-5. Configure your database in .env
-    
-    ```php
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=kaido_kit
-    DB_USERNAME=root
-    DB_PASSWORD=
-    ```
-    
-6. Configure your google sign in cliend id and secret (optional)
-    
-    ```php
-    #google auth
-    GOOGLE_CLIENT_ID=
-    GOOGLE_CLIENT_SECRET=
-    GOOGLE_REDIRECT_URI=http://localhost:8000/admin/oauth/callback/google
-    ```
-    
-7. Configure your resend for email sending (optional)
-    
-    ```php
-    #resend
-    MAIL_MAILER=resend
-    MAIL_HOST=127.0.0.1
-    MAIL_PORT=2525
-    MAIL_USERNAME=null
-    MAIL_PASSWORD=null
-    MAIL_ENCRYPTION=null
-    RESEND_API_KEY=
-    MAIL_FROM_ADDRESS="admin@domain.com"
-    MAIL_FROM_NAME="${APP_NAME}"
-    ```
-    
-8. Migrate your database
-    
-    ```php
-    php artisan migrate:fresh --seed
-    ```
-    
-9. Artisan Serve
-    
-    ```php
-    php artisan serve
-    ```
-    
-10. Npm run dev
-    
-    ```php
-    npm run dev
-    ```
-    
-11. If run successfully you will get this login interface
-    
-    ![image.png](.github/images/login-screen.png)
-    
-12. When signed in it will show this (not much yet but it getting there :) )
-    
-    ![image.png](.github/images/after-login-without-rbac.png)
-    
-13. Next step is to setup the RBAC, first generate the role and permission
-    
-    ```php
-    php artisan shield:generate --all
-    ```
-    
-14. It will ask which panel do you want to generate permission/policies for choose the admin panel.
-15. Setup the super admin using this command
-    
-    ```php
-    php artisan shield:super-admin
-    ```
-    
-    ![image.png](.github/images/provide-superadmin.png)
-    
-16. Choose your super admin user and login again.
-    
-    ![image.png](.github/images/after-login-rbac.png)
+## ⚙️ Key Features  
 
-## 🤝 Contributing
+### 🏗️ **Developer-Friendly**  
+- Pre-configured **FilamentPHP** for efficient admin panel creation.  
+- Custom **stubs & utilities** for rapid development.  
+- **Auto-reload & hot module replacement** for a smoother workflow.  
 
-We welcome contributions! Please follow these steps:
+### 🔐 **Advanced Authentication & Authorization**  
+- **RBAC (Role-Based Access Control)** using [Filament Shield](https://filamentphp.com/plugins/bezhansalleh-shield).  
+- **Google OAuth Login** powered by [Filament Socialite](https://filamentphp.com/plugins/dododedodonl-socialite).  
+- **Two-Factor Authentication (2FA)** support.  
+- **User Impersonation** via [Filament Impersonate](https://filamentphp.com/plugins/joseph-szobody-impersonate).  
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### 🔄 **API & Integration**  
+- **REST API** support with [Filament API Service](https://filamentphp.com/plugins/rupadana-api-service).  
+- Secure **API authentication & token management**.  
+- **Resend Email Integration** for streamlined email sending.  
 
-## 🙏 Acknowledgments
+### 🖼️ **Media & Content Management**  
+- **File & image handling** with [Spatie Media Library](https://spatie.be/docs/laravel-medialibrary).  
+- **Dynamic settings management** with [Spatie Laravel Settings](https://github.com/spatie/laravel-settings).  
+- **Drag & Drop File Uploads** with preview functionality.  
 
-- [FilamentPHP](https://filamentphp.com/)
-- [Laravel](https://laravel.com/)
-- All our amazing contributors
+### ⚙️ **Performance & Customization**  
+- Optimized **Tailwind CSS** theme for a clean UI.  
+- **Modular design** with extendable configurations.  
+- **Flexible panel settings** for easy customization.  
 
-## 💬 Support
+---
 
-- 🐛 [Report a bug](https://github.com/siubie/kaido-kit/issues)
-- 💡 [Request a feature](https://github.com/siubie/kaido-kit/issues)
-- 📧 [Email support](mailto:putraprima@gmail.com)
-- 💬 [Discord community](https://discord.com/invite/RwqXDUJGPg)
-- 💬 [Whatsapp community](https://chat.whatsapp.com/HJtRp9Eo5wl6NhYIJbkuZL)
+## 🔧 Configuration  
 
-## ⭐ Show your support
+### **Database Configuration**  
+Edit your `.env` file with your database credentials:  
+```ini
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=oas
+DB_USERNAME=postgres
+DB_PASSWORD=
+```
 
-Give a ⭐️ if this project helped you!
+### **Google Authentication (Optional)**  
+```ini
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI=http://localhost:8000/admin/oauth/callback/google
+```
+
+### **Email Setup (Optional - Resend API)**  
+```ini
+MAIL_MAILER=resend
+RESEND_API_KEY=
+MAIL_FROM_ADDRESS="admin@domain.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+---
+
+## 📢 Why Choose OAS?  
+
+OAS builds upon **Kaido Kit** and **FilamentPHP**, offering a **production-ready** admin panel framework with:  
+✔ **Seamless UI/UX** – Modern, polished, and intuitive admin interface.  
+✔ **Enhanced Security** – Multi-factor authentication and robust access control.  
+✔ **Scalability** – Designed to support enterprise-level applications.  
+✔ **Developer Efficiency** – Focus on **building features**, not boilerplate code.  
+
+---
+
+## 🤝 Contributing  
+
+We welcome contributions from the community! To contribute:  
+1. **Fork the repository**  
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)  
+3. **Commit your changes** (`git commit -m 'Add some amazing feature'`)  
+4. **Push to the branch** (`git push origin feature/amazing-feature`)  
+5. **Open a Pull Request**  
+
+---
+
+## 💬 Support & Community  
+
+📌 **Issues & Bugs** – [Open an Issue](https://github.com/YOUR_USERNAME/OAS/issues)  
+💡 **Feature Requests** – [Request a Feature](https://github.com/YOUR_USERNAME/OAS/issues)  
+📧 **Contact** – [Email Support](mailto:your-email@example.com)  
+💬 **FilamentPHP Community** – [Join the Discord](https://discord.com/invite/RwqXDUJGPg)  
+
+---
+
+## ⭐ Show Your Support  
+
+If you find **OAS** useful, **give it a ⭐ on GitHub** and help spread the word! 🚀  
