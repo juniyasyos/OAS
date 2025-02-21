@@ -37,6 +37,11 @@ jobs:
     - name: Generate key
       run: php artisan key:generate --ansi
 
+    - name: Create Database
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+
     - name: Setup database
       run: composer run setup
 
