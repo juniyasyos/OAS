@@ -29,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
             $event->extendSocialite('discord', \SocialiteProviders\Google\Provider::class);
         });
 
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'organization-structure');
+
         // // Ngrok For Development
         // if (config('app.env') === 'local') {
         //     URL::forceScheme('Https');

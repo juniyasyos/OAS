@@ -27,7 +27,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //opposite of up
-            $table->enum('status', ['active', 'inactive', 'suspensed']);
+            $table->enum('status', ['active', 'inactive', 'suspensed'])->default('active');
             $table->string('phone_number')->nullable();
             $table->string('password')->nullable(false)->change();
         });
