@@ -45,7 +45,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'nav.group' => 'Organization Management',
+    'nav.group' => 'Organization Structure',
     'nav.position.label' => 'Positions',
     'nav.position.icon' => 'heroicon-o-briefcase',
 

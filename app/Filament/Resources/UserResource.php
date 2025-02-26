@@ -45,7 +45,7 @@ class UserResource extends BaseResource
 
     public static function getLabel(): ?string
     {
-        return __('User Management');
+        return __('Users');
     }
 
     public static function getPluralLabel(): ?string
@@ -89,9 +89,7 @@ class UserResource extends BaseResource
                         ->searchable()
                         ->circular()
                         ->grow(false)
-                        ->getStateUsing(fn($record) => $record->avatar_url
-                            ? $record->avatar_url
-                            : "https://ui-avatars.com/api/?name=" . urlencode($record->name)),
+                        ->getStateUsing(fn($record) => $record->avatar_url ?: "https://ui-avatars.com/api/?name=" . urlencode($record->name)),
                     TextColumn::make('name')
                         ->searchable()
                         ->weight(FontWeight::Bold),
@@ -122,7 +120,10 @@ class UserResource extends BaseResource
                         Select::make('role')
                             ->relationship('roles', 'name')
                             ->multiple()
-                            ->required(),
+                            ->searchable()
+                            ->preload()
+                            ->optionsLimit(10)
+                            ->getOptionLabelFromRecordUsing(fn($record) => $record->name),
                     ]),
                 ActionGroup::make([
                     ViewAction::make(),
