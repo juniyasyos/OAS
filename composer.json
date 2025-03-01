@@ -26,6 +26,7 @@
         "joshembling/image-optimizer": "^1.4",
         "kenepa/translation-manager": "^4.0",
         "laravel/framework": "^11.31",
+        "laravel/octane": "^2.8",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "leandrocfe/filament-apex-charts": "^3.1",
@@ -88,6 +89,12 @@
             "@php artisan migrate:fresh --seed",
             "@php artisan shield:generate --all --panel=admin",
             "@php artisan shield:super-admin --user=11"
+        ],
+        "octane": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan optimize:clear",
+            "@php artisan optimize",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#34d399\" \"php artisan octane:start --host=0.0.0.0 --port=8080\" \"php artisan queue:work --tries=3 --timeout=90\" \"php artisan telescope:prune --hours=24\" \"npm run dev\" --names=octane,queue,telescope,vite"
         ]
     },
     "extra": {
