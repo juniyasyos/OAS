@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Policies\ActivityPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Activitylog\Models\Activity;
 use Filament\Support\Facades\FilamentView;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,10 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Gate::policy()
+        Gate::policy(Activity::class, ActivityPolicy::class);
         Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
             $event->extendSocialite('discord', \SocialiteProviders\Google\Provider::class);
         });
+
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'organization-structure');
 
         // // Ngrok For Development
         // if (config('app.env') === 'local') {

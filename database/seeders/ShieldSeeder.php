@@ -21,6 +21,12 @@ class ShieldSeeder extends Seeder
         $this->command->info('Shield Seeding Completed.');
     }
 
+    /**
+     * makeRolesWithPermissions
+     *
+     * @param  mixed $rolesWithPermissions
+     * @return void
+     */
     protected static function makeRolesWithPermissions(string $rolesWithPermissions): void
     {
         if (!blank($rolePlusPermissions = json_decode($rolesWithPermissions, true))) {
@@ -49,6 +55,12 @@ class ShieldSeeder extends Seeder
         }
     }
 
+    /**
+     * makeDirectPermissions
+     *
+     * @param  mixed $directPermissions
+     * @return void
+     */
     public static function makeDirectPermissions(string $directPermissions): void
     {
         if (!blank($permissions = json_decode($directPermissions, true))) {

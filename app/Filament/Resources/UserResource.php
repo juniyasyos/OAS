@@ -43,6 +43,21 @@ class UserResource extends BaseResource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    public static function getLabel(): ?string
+    {
+        return __('Users');
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return __('');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('User & Access Control');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -74,9 +89,7 @@ class UserResource extends BaseResource
                         ->searchable()
                         ->circular()
                         ->grow(false)
-                        ->getStateUsing(fn($record) => $record->avatar_url
-                            ? $record->avatar_url
-                            : "https://ui-avatars.com/api/?name=" . urlencode($record->name)),
+                        ->getStateUsing(fn($record) => $record->avatar_url ?: "https://ui-avatars.com/api/?name=" . urlencode($record->name)),
                     TextColumn::make('name')
                         ->searchable()
                         ->weight(FontWeight::Bold),
@@ -107,7 +120,10 @@ class UserResource extends BaseResource
                         Select::make('role')
                             ->relationship('roles', 'name')
                             ->multiple()
-                            ->required(),
+                            ->searchable()
+                            ->preload()
+                            ->optionsLimit(10)
+                            ->getOptionLabelFromRecordUsing(fn($record) => $record->name),
                     ]),
                 ActionGroup::make([
                     ViewAction::make(),
@@ -160,12 +176,12 @@ class UserResource extends BaseResource
 
     public static function getModelLable(): string
     {
-        return __('User');
+        return __('User Management');
     }
 
     public static function getPluralModelLabl(): string
     {
-        return __('Users');
+        return __('User Managements');
     }
 
 }

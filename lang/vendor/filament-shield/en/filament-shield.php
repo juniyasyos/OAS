@@ -9,7 +9,6 @@ return [
 
     'column.name' => 'Name',
     'column.guard_name' => 'Guard Name',
-    'column.team' => 'Team',
     'column.roles' => 'Roles',
     'column.permissions' => 'Permissions',
     'column.updated_at' => 'Updated At',
@@ -23,10 +22,8 @@ return [
     'field.name' => 'Name',
     'field.guard_name' => 'Guard Name',
     'field.permissions' => 'Permissions',
-    'field.team' => 'Team',
-    'field.team.placeholder' => 'Select a team ...',
     'field.select_all.name' => 'Select All',
-    'field.select_all.message' => 'Enables/Disables all Permissions for this role',
+    'field.select_all.message' => 'Enable all <span class="text-primary font-medium">Available</span> permissions for this role.',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,9 +31,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'nav.group' => 'Filament Shield',
-    'nav.role.label' => 'Roles',
-    'nav.role.icon' => 'heroicon-o-shield-check',
+    'nav.group' => 'User & Access Control',
+    'nav.role.label' => 'Roles & Permission',
     'resource.label.role' => 'Role',
     'resource.label.roles' => 'Roles',
 
@@ -46,7 +42,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'section' => 'Entities',
+    'section' => 'Entity',
     'resources' => 'Resources',
     'widgets' => 'Widgets',
     'pages' => 'Pages',
@@ -58,7 +54,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'forbidden' => 'You do not have permission to access',
+    'forbidden' => 'You do not have access permissions',
 
     /*
     |--------------------------------------------------------------------------
@@ -76,8 +72,8 @@ return [
         'force_delete' => 'Force Delete',
         'force_delete_any' => 'Force Delete Any',
         'restore' => 'Restore',
+        'replicate' => 'Replicate',
         'reorder' => 'Reorder',
         'restore_any' => 'Restore Any',
-        'replicate' => 'Replicate',
     ],
 ];

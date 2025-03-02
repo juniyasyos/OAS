@@ -2,10 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,7 +15,13 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('type');
             $table->morphs('notifiable');
-            $table->jsonb('data');
+            $jsonColumnType = match (Config::get('database.default')) {
+                'pgsql' => 'jsonb',
+                default => 'json',
+            };
+
+            $table->$jsonColumnType('data');
+
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

@@ -16,6 +16,7 @@ return new class extends Migration
             //change password column to nullable
             $table->string('password')->nullable(true)->change();
             $table->string('phone_number')->nullable()->index();
+            $table->enum('status', ['active', 'inactive', 'suspensed']);
         });
     }
 
@@ -26,8 +27,9 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //opposite of up
-            $table->string('password')->nullable(false)->change();
+            $table->enum('status', ['active', 'inactive', 'suspensed'])->default('active');
             $table->string('phone_number')->nullable();
+            $table->string('password')->nullable(false)->change();
         });
     }
 };

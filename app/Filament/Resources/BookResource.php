@@ -20,35 +20,12 @@ use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\BookResource\Pages;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class BookResource extends BaseResource implements HasShieldPermissions
+class BookResource extends BaseResource
 {
     //
     protected static ?string $model = Book::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'restore',
-            'restore_any',
-            'replicate',
-            'reorder',
-            'delete',
-            'delete_any',
-            'force_delete',
-            'force_delete_any',
-            'book:create',
-            'book:update',
-            'book:delete',
-            'book:pagination',
-            'book:detail',
-        ];
-    }
 
     public static function form(Form $form): Form
     {

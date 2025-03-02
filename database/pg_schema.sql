@@ -21,6 +21,49 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: activity_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.activity_log (
+    id bigint NOT NULL,
+    log_name character varying(255),
+    description text NOT NULL,
+    subject_type character varying(255),
+    subject_id bigint,
+    causer_type character varying(255),
+    causer_id bigint,
+    properties json,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    event character varying(255),
+    batch_uuid uuid
+);
+
+
+ALTER TABLE public.activity_log OWNER TO postgres;
+
+--
+-- Name: activity_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.activity_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.activity_log_id_seq OWNER TO postgres;
+
+--
+-- Name: activity_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.activity_log_id_seq OWNED BY public.activity_log.id;
+
+
+--
 -- Name: books; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -816,6 +859,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: activity_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.activity_log ALTER COLUMN id SET DEFAULT nextval('public.activity_log_id_seq'::regclass);
+
+
+--
 -- Name: books id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -932,6 +982,14 @@ ALTER TABLE ONLY public.socialite_users ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: activity_log activity_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.activity_log
+    ADD CONSTRAINT activity_log_pkey PRIMARY KEY (id);
 
 
 --
@@ -1207,10 +1265,24 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: activity_log_log_name_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX activity_log_log_name_index ON public.activity_log USING btree (log_name);
+
+
+--
 -- Name: breezy_sessions_authenticatable_type_authenticatable_id_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX breezy_sessions_authenticatable_type_authenticatable_id_index ON public.breezy_sessions USING btree (authenticatable_type, authenticatable_id);
+
+
+--
+-- Name: causer; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX causer ON public.activity_log USING btree (causer_type, causer_id);
 
 
 --
@@ -1274,6 +1346,13 @@ CREATE INDEX sessions_last_activity_index ON public.sessions USING btree (last_a
 --
 
 CREATE INDEX sessions_user_id_index ON public.sessions USING btree (user_id);
+
+
+--
+-- Name: subject; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX subject ON public.activity_log USING btree (subject_type, subject_id);
 
 
 --
