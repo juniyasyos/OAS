@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //change password column to nullable
             $table->string('password')->nullable(true)->change();
-            $table->string('phone_number')->nullable();
+            $table->string('phone_number')->nullable()->index();
         });
     }
 
