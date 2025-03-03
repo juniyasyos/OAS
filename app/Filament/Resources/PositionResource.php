@@ -7,16 +7,17 @@ use Filament\Tables;
 use App\Models\Position;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Filament\Resources\BaseResource;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Filters\TrashedFilter;
+use Filament\Support\Enums\FontWeight;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\BaseResource;
+use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Forms\Components\MarkdownEditor;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\{
     ActionGroup,
     EditAction,
@@ -98,6 +99,7 @@ class PositionResource extends BaseResource
                             ->label(__('organization-structure::organization-structure.column.name'))
                             ->sortable()
                             ->searchable()
+                            ->weight(FontWeight::Bold)
                             ->icon('heroicon-o-briefcase')
                             ->wrap()
                             ->alignStart()

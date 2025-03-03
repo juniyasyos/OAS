@@ -38,18 +38,18 @@ class AdminPanelProvider extends PanelProvider
 {
     private ?KaidoSetting $settings = null;
 
-    public function __construct()
-    {
-        //this is feels bad but this is the solution that i can think for now :D
-        // Check if settings table exists first
-        try {
-            if (Schema::hasTable('settings')) {
-                $this->settings = app(KaidoSetting::class);
-            }
-        } catch (\Exception $e) {
-            $this->settings = null;
-        }
-    }
+    // public function __construct()
+    // {
+    //     //this is feels bad but this is the solution that i can think for now :D
+    //     // Check if settings table exists first
+    //     try {
+    //         if (Schema::hasTable('settings')) {
+    //             $this->settings = app(KaidoSetting::class);
+    //         }
+    //     } catch (\Exception $e) {
+    //         $this->settings = null;
+    //     }
+    // }
 
     public function panel(Panel $panel): Panel
     {
