@@ -17,6 +17,7 @@ use Rupadana\ApiService\ApiServicePlugin;
 use Filament\Http\Middleware\Authenticate;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Rmsramos\Activitylog\ActivitylogPlugin;
+use Juniyasyos\FilamentPWA\FilamentPWAPlugin;
 use Hasnayeen\Themes\Http\Middleware\SetTheme;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Session\Middleware\StartSession;
@@ -29,9 +30,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Kenepa\TranslationManager\TranslationManagerPlugin;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -115,6 +116,7 @@ class AdminPanelProvider extends PanelProvider
                 ->label('Audit & Activity Logs'),
 
             FilamentShieldPlugin::make(),
+            FilamentPWAPlugin::make(),
             // ApiServicePlugin::make(),
             BreezyCore::make()
                 ->myProfile(

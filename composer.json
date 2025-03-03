@@ -24,6 +24,7 @@
         "hasnayeen/themes": "*",
         "jeffgreco13/filament-breezy": "^2.4",
         "joshembling/image-optimizer": "^1.4",
+        "juniyasyos/filament-pwa-kaido": "^1.0",
         "kenepa/translation-manager": "^4.0",
         "laravel/framework": "^11.31",
         "laravel/octane": "^2.8",
